@@ -1,0 +1,29 @@
+﻿@model List<Kpmg.Datas.Models.Files.Information>
+@using Kpmg.Datas.Business 
+<h2>@ViewBag.Title</h2> 
+@if (Model != null && Model.Any()) {
+    <div class="row">
+        <table>
+            <thead>
+            <tr>
+                <td>@Kpmg.Messages.InformationMessage.Column_Account</td>
+                <td>@Kpmg.Messages.InformationMessage.Column_Description</td>
+                <td>@Kpmg.Messages.InformationMessage.Column_Currency</td>
+                <td>@Kpmg.Messages.InformationMessage.Column_Amount</td>
+                <td></td> 
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var information in Model)
+                { 
+                    <tr >
+                        <td>@information.Account</td>
+                        <td>@information.Description</td>
+                        <td>@information.CurrencyCode</td>
+                        <td>@information.Amount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

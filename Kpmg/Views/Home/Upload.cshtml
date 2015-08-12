@@ -1,0 +1,49 @@
+﻿@model Kpmg.Datas.Business.DataTransactionResponse
+@using Kpmg.Datas.Business
+@using Kpmg.Messages
+<h2>@ViewBag.Title</h2>
+<h3></h3>
+<div class="row">
+    @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label class="col-md-2 control-label">@ViewBag.Message</label>
+            <div class="col-md-10">
+                <input type="file" name="file" class="form-control">
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <input type="submit" class="btn btn-primary" value="@Common.Button_Upload">
+        </div>
+    }
+</div>
+
+@if (Model != null) {
+    <div class="row">
+        <table>
+            <thead>
+            <tr>
+                <td>@Common.Upload_Column_Line</td>
+                <td></td> 
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.Messages)
+                {
+                    string messages = string.Empty;
+                    string messagesClass = "alert alert-success";
+                    if (line.State == DataTransactionState.Ignored)
+                    {
+                        messages = " : " + line.Messages.Aggregate((a, b) => a + " <br/>" + b);
+                        messagesClass = "alert alert-danger";
+                    }
+                    <tr class="@messagesClass">
+                        <td>@line.IdLine</td>
+                        <td>@line.State @messages</td> 
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

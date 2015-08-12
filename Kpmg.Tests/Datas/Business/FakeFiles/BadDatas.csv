@@ -1,0 +1,7 @@
+Account;Description;Currency;Amount
+;myDescription;EUR;1
+myAccount;;EUR;1
+myAccount;myDescription;;1
+myAccount;myDescription;EUR;
+myAccount;myDescription;EUR;badAmount
+myAccount;myDescription;badCurrency;10,55
